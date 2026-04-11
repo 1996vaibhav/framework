@@ -18,6 +18,8 @@ import com.qa.callhippo.utils.ElementUtil;
 public class AccountsPage {
 	
 	
+	int a = 100;
+	
 	private  WebDriver driver;
 	
 	private ElementUtil elementUtil;

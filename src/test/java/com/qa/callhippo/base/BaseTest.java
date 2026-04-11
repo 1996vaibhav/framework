@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import com.beust.jcommander.Parameters;
 import com.qa.callhippo.factory.DriverFactory;
 import com.qa.callhippo.pages.AccountsPage;
 import com.qa.callhippo.pages.LoginPage;
@@ -34,6 +35,11 @@ public class BaseTest {
 	protected RegistrationPage  registrationPage ;
 	
 
+	/*
+	 * here we want to read browser name from testNG file
+	 * 
+	 */	
+	
 	
 	@BeforeTest
 	public void setUp() {
