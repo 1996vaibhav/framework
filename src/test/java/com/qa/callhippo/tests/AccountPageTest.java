@@ -17,7 +17,8 @@ public class AccountPageTest extends BaseTest {
 	public void accPageSetUp() {
 //		doLogin method returning the AccountPage object 
 //		so store it inside the AccountPage reference i.e. accountPage
-		accountPage = loginPage.doLogin("avi@google.com", "Test@123");
+		accountPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
+		
 	}
 	
 	@Test

@@ -1,7 +1,13 @@
 package com.qa.callhippo.factory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -16,22 +22,35 @@ public class DriverFactory {
 	
 	
 	public WebDriver driver;
+	public Properties prop ; 
+	
+	public static ThreadLocal<WebDriver> tldriver = new ThreadLocal<WebDriver>();
 	
 	
-	public WebDriver intdriver(String browserName) {
+	
+	public WebDriver intdriver(Properties prop) {
+		
+		String browserName = prop.getProperty("browser");
 		
 		
 		if(browserName.trim().equalsIgnoreCase("chrome")){
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
+			tldriver.set(new ChromeDriver());
 			System.out.println("chrome launched successfully");
 		}
 		
 		else if(browserName.trim().equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();	
+			//driver = new FirefoxDriver();	
+			tldriver.set(new FirefoxDriver());
+			System.out.println("firefox launched successfully");
+
 		}
 		
-		else if(browserName.trim().equalsIgnoreCase("safari")) {
-			driver = new SafariDriver();	
+		else if(browserName.trim().equalsIgnoreCase("edge")) {
+			//driver = new EdgeDriver();
+			tldriver.set(new EdgeDriver());
+			System.out.println("edge launched successfully");
+
 		}
 		
 		else{
@@ -47,21 +66,48 @@ public class DriverFactory {
 		 * 
 		 */
 		
-		driver.manage().deleteAllCookies(); //cookies clear
+		getDriver().manage().deleteAllCookies(); //cookies clear
 		
-		driver.manage().window().maximize(); // window maximize
+		getDriver().manage().window().maximize(); // window maximize
 		
-		driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login"); // url launch
+		getDriver().get(prop.getProperty("url")); // url launch
 		
-		return driver; // return always goes back to the CLASS that called it's method
+		return getDriver(); // return always goes back to the CLASS that called it's method
 
 	}
 	
+	
+	
+	public static WebDriver getDriver() {
+		return tldriver.get();
+	}
+	
+//	   need to read data from config.properties
 //     first create the object of Properties
-//	   create object of FileInputStream class
-//	   make the connection with properties file
+//	   create object of FileInputStream 
+//	   make the connection with properties file using FileInputStream
+//	   provide path of config properties inside constructor of FileInputStream
 //	   load the properties
 //	   return prop
+	
+	
+	public Properties initProp() {
+		
+		prop = new Properties();
+		try {
+			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
+			try {
+				prop.load(ip);
+			} catch (IOException e) {
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return prop;
+		
+		
+	}
 	
 	
 	

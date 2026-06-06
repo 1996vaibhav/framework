@@ -3,21 +3,34 @@
 <suite name="Opencart App Test Regression Suite" verbose="4" thread-count="3" parallel="tests">
 
 
-	<test name="Login Page Test">
+	<test name="Login Page Test_chrome">
 	    <parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.qa.callhippo.tests.LoginPageTest" />
 		</classes>
 	</test>
-
-
-<test name="Account Page Test">
+	
+	
+	<test name="Login Page Test_firefox">
 	    <parameter name="browser" value="firefox" />
-
 		<classes>
-			<class name="com.qa.callhippo.tests.AccountPageTest" />
+			<class name="com.qa.callhippo.tests.LoginPageTest" />
 		</classes>
 	</test>
+	
+	
+<!--	that can also be a case were login page test can work on chrome but got fail with firefox-->
+<!--	so what we have to do is we have to run same case differently one for chrome and other for firefox-->
+<!--    just make sure we have to give different name  to the test -->
+
+
+<!--<test name="Account Page Test">-->
+<!--	    <parameter name="browser" value="firefox" />-->
+
+<!--		<classes>-->
+<!--			<class name="com.qa.callhippo.tests.AccountPageTest" />-->
+<!--		</classes>-->
+<!--	</test>-->
 	
 	
 	<test name="ProductInfo Page Test">
