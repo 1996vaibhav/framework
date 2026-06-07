@@ -25,7 +25,6 @@ public class AccountPageTest extends BaseTest {
 	public void isLogoutLinkExistTest() {
 		Assert.assertTrue(accountPage.isLogoutLinkExist());
 
-		System.out.println("Test");
 	}
 	
 	
