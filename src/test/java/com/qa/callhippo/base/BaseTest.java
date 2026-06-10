@@ -75,7 +75,7 @@ public class BaseTest {
 	
 	
 	
-	driver = df.intdriver(prop); //stored in THIS driver variable
+	driver = df.initDriver(prop); //stored in THIS driver variable
 	
 	loginPage = new LoginPage(driver); //THIS driver from BaseTest sent to LoginPage!
 	/*
